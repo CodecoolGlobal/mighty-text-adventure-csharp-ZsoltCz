@@ -5,27 +5,30 @@ namespace MightyTextAdventure.Data.Player;
 
 public class Player
 {
-    private Area _currentArea;
-    
-    private string _name;
+  private Area _currentArea;
 
-    private Inventory _inventory;
+  private readonly string _name;
 
-    public Player(Area startingArea)
+  private Inventory _inventory;
+
+  public string Name => _name;
+
+  public Area CurrentArea
+  {
+    get => _currentArea;
+    set
     {
-        _currentArea = startingArea;
-        _name = "";
-        
-        _inventory = new Inventory(new Lamp("Lamp", "Just a regular lamp", 10));
+      _currentArea = value;
     }
+  }
 
-    public void Rename(string name)
-    {
-        _name = name;
-    }
+  public Player(string name, Area startingArea)
+  {
+    _currentArea = startingArea;
+    _name = name;
 
-    public string GetName()
-    {
-        return _name;
-    }
+    _inventory = new Inventory(new Lamp("Lamp", "Just a regular lamp", 10));
+  }
+
+
 }
