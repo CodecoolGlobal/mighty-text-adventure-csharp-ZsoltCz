@@ -21,4 +21,9 @@ public class Item
   {
     return _name;
   }
+
+  public override string ToString()
+  {
+    return _description;
+  }
 }

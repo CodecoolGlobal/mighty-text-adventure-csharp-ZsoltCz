@@ -2,34 +2,36 @@
 
 public class Inventory
 {
-  private readonly List<Item> _items;
+  public int ItemCount => Items.Count;
+
+  public List<Item> Items { get; }
 
   public Inventory(List<Item> items)
   {
-    _items = new List<Item>();
+    Items = new List<Item>();
     foreach (var item in items)
     {
-      _items.Add(item);
+      Items.Add(item);
     }
   }
 
   public Inventory()
   {
-    _items = new List<Item>();
+    Items = new List<Item>();
   }
 
   public Inventory(Item item)
   {
-    _items = new List<Item> { item };
+    Items = new List<Item> { item };
   }
 
   public void AddItem(Item item)
   {
-    _items.Add(item);
+    Items.Add(item);
   }
 
-  public void RemoveItem(Item item)
+  public bool RemoveItem(Item item)
   {
-    _items.Remove(item);
+    return Items.Remove(item);
   }
 }

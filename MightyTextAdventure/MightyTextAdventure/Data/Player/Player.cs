@@ -11,6 +11,8 @@ public class Player
 
   private Inventory _inventory;
 
+  public Inventory Inventory => _inventory;
+
   public string Name => _name;
 
   public Area CurrentArea
