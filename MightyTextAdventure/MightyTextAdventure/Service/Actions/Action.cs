@@ -5,11 +5,11 @@ namespace MightyTextAdventure.Service.Actions;
 
 public abstract class Action
 {
-  public string Description;
+  public readonly string Description;
 
-  public string[] Triggers;
+  public readonly string[] Triggers;
 
-  public string AfterDescription;
+  protected readonly string AfterDescription;
 
   public Action(string description, string[] triggers, string afterDescription)
   {

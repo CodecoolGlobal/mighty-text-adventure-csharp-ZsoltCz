@@ -14,7 +14,7 @@ public class Switch : Action
         _actionToUnlock1 = actionToUnlock1;
         _actionToUnlock2 = actionToUnlock2;
         _afterDescription1 = afterDescription1;
-        afterDescription2 = afterDescription2;
+        _afterDescription2 = afterDescription2;
     }
 
     public override string Perform(Player player, Area[] areas)

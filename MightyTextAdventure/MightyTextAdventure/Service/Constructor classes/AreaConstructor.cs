@@ -18,7 +18,9 @@ public class AreaConstructor
             CreateArea0(),
             CreateArea1(),
             CreateArea2(),
-            CreateArea3()
+            CreateArea3(),
+            CreateArea4(),
+            CreateArea5(),
         };
     }
     private static Area CreateArea0()
@@ -27,7 +29,7 @@ public class AreaConstructor
             "You found your car keys and left the creepy forest. Congratulations!");
         var area0Actions = new List<Action>
         {
-            new Move("Go into the cave", new string[] { "enter", "go", "enter cave" }, "You go into the dark cave.", 1),
+            new Move("Go into the cave", new string[] { "enter", "go", "enter cave", "go into cave" }, "You go into the dark cave.", 1),
             new GiveItemAction("Open car with keys", new []{"open car", "enter car", "car"}, "You use your keys to open the car.", "You don't have the keys!", CarKey, enterCar),
             new GameEndingAction("Keep walking", new []{"walk"}, "You leave your car behind and walk home. Thank you for protecting the environment!")
         };
@@ -49,7 +51,6 @@ public class AreaConstructor
   
     private static Area CreateArea2()
     {
-        var carKey = new Item("Car keys", "The keys for your car");
         var moveToArea3 = new Move("Go left", new[] { "left", "go left", "l" }, "You go through the left door.", 3);
         var moveToArea4 = new Move("Go right", new[] { "right", "go right", "r" }, "You go through the right door.", 4);
         var pullLever = new Switch("Pull the lever", new[] { "pull lever", "pull", "lever" },
@@ -59,12 +60,9 @@ public class AreaConstructor
         
         var area1Actions = new List<Action>
         {
-            new MathPuzzle("Try the puzzle", new[] { "try the puzzle", "puzzle", "solve", "solve puzzle" },
+            new MathPuzzle("Try the puzzle", new[] { "try the puzzle", "puzzle", "solve", "solve puzzle", "try puzzle" },
                 "You hear a satisfying beep coming from the screen.",
-                "The screen makes a terrible sound.", pullLever),
-            new Move("Go left", new[] { "left", "go left", "l" }, "You go into the left tunnel.", 5),
-            new Move("Go right", new[] { "right", "go right", "r" }, "You go into the right tunnel.", 2),
-            
+                "The screen makes a terrible sound.", pullLever)
         };
         return new Area(2,
             "You arrive in a cave filled with many objects. The door behind you has closed. ..................",
@@ -94,5 +92,69 @@ public class AreaConstructor
         return new Area(3,
             "You arrive in a smaller rectangular room filled with dust. You see a screen with 2 numbers and your flashlight reveals an opening in front of you in the cave wall.",
             area3Actions, new[] { 2, 5 });
+    }
+
+    private static Area CreateArea4()
+    {
+        var codecoolSticker = new Item("Codecool sticker", "A sticker featuring the Codecool logo");
+        var inspectStickerAction = new Inspect("Inspect Codecool sticker", new[] { "inspect sticker", "inspect" },
+            "You look at the Codecool sticker. It's very cool.");
+        var moveToArea2 = new Move("Go back to the previous room", new[] { "go back", "back" },
+            "You move back to the previous room.", 2);
+        
+        var placeStickerAction = new GiveItemAction("Place Codecool sticker on windshield",
+            new[] { "place sticker", "place codecool sticker", "sticker" }, "You have placed the sticker on your car.",
+            "You couldn't place the sticker on your car.", codecoolSticker, inspectStickerAction);
+        
+        var pickupStickerAction = new TakeItemActionSpecial("Pick up the Codecool sticker",
+            new[] { "pick up sticker", "sticker", "pick up the sticker", "pick up" },
+            "You found the secret Codecool sticker", codecoolSticker, 0, placeStickerAction);
+        
+        var area4Actions = new List<Action>()
+        {
+            pickupStickerAction,
+            moveToArea2
+        };
+
+        return new Area(4,
+            "You find yourself in a colorful room full of gold coins and a pedestal with a familiar sticker on it",
+            area4Actions, new[] { 2 });
+    }
+
+    private static Area CreateArea5()
+    {
+        var ladder = new Item("Ladder", "A ladder.");
+        var pickupLadderAction = new TakeItemAction("Pick up ladder",
+            new[] { "pick up ladder", "take ladder", "ladder" },
+            "You have picked up the ladder", ladder);
+
+        var moveFromArea1ToArea5 = new Move(
+            "Climb up the ladder",
+            new[] { "climb", "climb up", "climb ladder", "ladder" },
+            "You climb up the ladder",
+            5
+        );
+        
+        var moveToArea3 = new Move("Go back to the dusty room", new[] { "go back", "back", "go to dusty room", "dusty room" },
+            "You move back to the previous room.", 3);
+        var moveToArea1 = new Move("Climb down the ladder", new[] { "climb", "climb down", "go down" },
+            "You climb down the ladder", 1);
+        var placeLadderAction = new GiveItemAction("Place ladder into the hole", new[] { "place ladder", "ladder" },
+            "You have placed the ladder in the hole, making it safe to descend.",
+            "You don't have a ladder!", ladder, moveToArea1);
+        
+        
+
+        var area5Actions = new List<Action>()
+        {
+            moveToArea3,
+            pickupLadderAction,
+            placeLadderAction
+        };
+        
+        return new Area(5, "You are in a circular room. There is a relatively deep hole to your left with faint light coming out of it. You see a ladder in the far side of the room.",
+            area5Actions, new[]{1, 3});
+
+
     }
 }

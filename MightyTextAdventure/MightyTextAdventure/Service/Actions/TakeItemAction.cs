@@ -6,21 +6,21 @@ namespace MightyTextAdventure.Service.Actions;
 
 public class TakeItemAction:Action
 {
-  private readonly Item _item;
+  protected readonly Item Item;
 
-  private readonly Inventory _inventory;
+  protected readonly Inventory Inventory;
   public TakeItemAction(string description, string[] triggers, string afterDescription, Item item):base(description, triggers, afterDescription)
   {
-    _item = item;
-    _inventory = new Inventory();
-    _inventory.AddItem(item);
+    Item = item;
+    Inventory = new Inventory();
+    Inventory.AddItem(item);
   }
 
   public override string Perform(Player player, Area[] areas)
   {
-    if (_inventory.RemoveItem(_item))
+    if (Inventory.RemoveItem(Item))
     {
-      player.Inventory.AddItem(_item);
+      player.Inventory.AddItem(Item);
       player.CurrentArea.Actions.Remove(this);
     }
 

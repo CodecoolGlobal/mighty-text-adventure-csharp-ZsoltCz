@@ -98,7 +98,7 @@ public class Game
   {
     _display.PrintMessage("Please choose a name for your character.");
     string nameOfCharacter = _input.GetInputFromUser();
-    var lamp = new Lamp("lamp", "a lamp", 10);
+    var lamp = new Lamp("lamp", "a lamp", 20);
     Player player = new(nameOfCharacter, _areas[0], lamp);
     _player = player;
   }
@@ -106,6 +106,7 @@ public class Game
 
   private bool Step(int[]? conn, MA.Action action)
   {
+    Console.WriteLine($"number of actions in area 0: {_areas[0].Actions.Count}");
     if (action is MA.GameEndingAction)
     {
       _display.PrintMessage(action.Perform(_player, _areas));
@@ -117,7 +118,6 @@ public class Game
       return false;
       //Game over
     }
-    Console.WriteLine($"actions in current area: {_player.CurrentArea.Actions.Count}");
     _display.PrintMessage(_player.Lamp.GetDescription());
     _display.PrintMessage(action.Perform(_player, _areas));
     return true;
