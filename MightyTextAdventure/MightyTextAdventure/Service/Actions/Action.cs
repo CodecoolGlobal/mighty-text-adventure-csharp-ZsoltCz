@@ -3,7 +3,7 @@ using MightyTextAdventure.Data.Player;
 
 namespace MightyTextAdventure.Service.Actions;
 
-public class Action
+public abstract class Action
 {
   public string Description;
 
@@ -19,8 +19,5 @@ public class Action
   }
 
 
-  public virtual void Perform(Player player, Area[] areas)
-  {
-
-  }
+  public abstract string Perform(Player player, Area[] areas);
 }

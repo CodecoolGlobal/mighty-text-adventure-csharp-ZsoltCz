@@ -9,23 +9,32 @@ public class MathPuzzle : Action
 
     private readonly int _number2;
 
+    private readonly Action _actionToUnlock;
+
+    private readonly string _failureDescription;
+
     public int Answer => _number1 + _number2;
     
-    public MathPuzzle(string description, string[] triggers, string afterDescription) : base(description, triggers, afterDescription)
+    public MathPuzzle(string description, string[] triggers, string afterDescription, string failureDescription, Action actionToUnlock) : base(description, triggers, afterDescription)
     {
         Random random = new Random();
         _number1 = random.Next(100);
         _number2 = random.Next(100);
+        _actionToUnlock = actionToUnlock;
+        _failureDescription = failureDescription;
     }
 
-    public override void Perform(Player player, Area[] areas)
+    public override string Perform(Player player, Area[] areas)
     {
         Console.WriteLine($"What is {_number1} + {_number2}?");
         var playerAnswer = int.Parse(Console.ReadLine());
         if (playerAnswer == Answer)
         {
-            Console.WriteLine("Correct");
             player.CurrentArea.Actions.Remove(this);
+            player.CurrentArea.Actions.Add(_actionToUnlock);
+            return AfterDescription;
         }
+
+        return _failureDescription;
     }
 }

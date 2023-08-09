@@ -2,20 +2,21 @@
 
 public class Lamp : Item
 {
-  private int Charge;
+  private int _charge;
 
   public Lamp(string name, string description, int charge) : base(description, name)
   {
-    Charge = charge;
+    _charge = charge;
   }
 
-  public void Drain()
+  public bool Drain()
   {
-    Charge--;
+    _charge--;
+    return _charge > 0;
   }
 
   public override string GetDescription()
   {
-    return $"{base.GetDescription()}. You have {Charge} charges remaining.";
+    return $"{base.GetDescription()}. You have {_charge} charges remaining.";
   }
 }

@@ -11,6 +11,8 @@ public class Player
 
   private Inventory _inventory;
 
+  public Lamp Lamp { get; }
+
   public Inventory Inventory => _inventory;
 
   public string Name => _name;
@@ -24,11 +26,11 @@ public class Player
     }
   }
 
-  public Player(string name, Area startingArea)
+  public Player(string name, Area startingArea, Lamp lamp)
   {
     _currentArea = startingArea;
     _name = name;
-
+    Lamp = lamp;
     _inventory = new Inventory(new Lamp("Lamp", "Just a regular lamp", 10));
   }
 
