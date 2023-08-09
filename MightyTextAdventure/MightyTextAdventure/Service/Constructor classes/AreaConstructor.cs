@@ -40,7 +40,7 @@ public class AreaConstructor
     {
         var area1Actions = new List<Action>
         {
-            new Move("Go back", new[] { "back", "go back", "b", "exit" }, "You exit the cave.", 0),
+            new Move("Exit cave", new[] { "back", "go back", "b", "exit", "exit cave" }, "You exit the cave.", 0),
             new Move("Go left", new[] { "left", "go left", "l" }, "You go into the left tunnel.", 5),
             new Move("Go right", new[] { "right", "go right", "r" }, "You go into the right tunnel.", 2)
         };
@@ -75,7 +75,7 @@ public class AreaConstructor
             new[] { "take keys", "take car keys", "car key", "take key" }, "You pick up your car keys.", CarKey);
         var moveToArea2 = new Move("Go back to the previous room", new[] { "go back", "back" },
             "You move back to the previous room.", 2);
-        var moveToArea5 = new Move("Go into the opening in front of you", new[] { "go forward", "forward", "enter opening" },
+        var moveToArea5 = new Move("Go into the opening in front of you", new[] { "enter opening", "go", "go forward", "forward", "enter opening" },
             "You go into the opening in front of you.", 5);
         var puzzle = new MathPuzzle("Try to solve the puzzle",
             new[] { "try the puzzle", "puzzle", "solve", "solve puzzle" },
