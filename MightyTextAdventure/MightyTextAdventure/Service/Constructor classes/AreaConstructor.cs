@@ -38,13 +38,21 @@ public class AreaConstructor
 
     private static Area CreateArea1()
     {
+        var pushButton = new Move("Go into the right tunnel", new[] { "right", "go right", "r" }, "You go into the right tunnel.", 2);
+        var seeButton = new Discover("Push the button", new[] { "push", "button", "push button", "activate" },
+            "The wall on the right begins to move, revealing a new passage!", pushButton);
         var area1Actions = new List<Action>
         {
+            //Alagút elrejtése, gombbal
             new Move("Exit cave", new[] { "back", "go back", "b", "exit", "exit cave" }, "You exit the cave.", 0),
-            new Move("Go right", new[] { "right", "go right", "r" }, "You go into the right tunnel.", 2)
+            new Discover("Examine Rug", new[] {"examine", "examine rug", "rug", "carpet", "examine carpet"}, "You see an indentation under the rug, inside is a stone button surrounded by red dust.", seeButton),
+            new Inspect("Look at odd-looking dust", new[]{"look", "dust", "look at dust", "examine dust"}, "The sparkling red dust seems to go from the rug to the right wall, you figure it's best not to disturb it."),
+            new Inspect("Catch bug", new[] {"catch", "bug", "catch bug"}, "You catch the bug for only a second, but it escapes from you clutches. An error message still lingers in your head."),
+            new Inspect("Drink water", new[] { "drink", "drink water", "drink tar" },
+                "It looks and smells like oil, I would rather not drink it.")
         };
         return new Area(1,
-            "You arrive in a dark cave entrance. Your lamp reveals two tunnels, one on the right and another on the left.",
+            "You arrive in a dark cave entrance. Your lamp reveals an old rug in the middle of the cave, odd-looking dust on the ground, fresh water pouring from the other side of the room, an opening on the ceiling and an annoying bug that likes your lamp a bit too much.",
             area1Actions, new[] { 0, 2, 5 });
     }
   
