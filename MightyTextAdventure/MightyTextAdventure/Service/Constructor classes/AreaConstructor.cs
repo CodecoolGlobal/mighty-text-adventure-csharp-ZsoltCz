@@ -73,12 +73,12 @@ public class AreaConstructor
         
         var area2Actions = new List<Action>
         {
-            new Discover("You see a shiny rock by the wall of the room.", new[] {"pick up", "pick", "pick up rock", "rock"}, "The rock looks like a crystal from a Sci-Fi movie it was on a button that revealed a lever!", inspectRock),
-            new Discover("At the other end of the room the wall looks peculiar", new []{"inspect wall", "wall"}, "When you touch the wall it falls apart revealing a puzzle!", unlockLever),
+            new Discover("Pick up shiny rock", new[] {"pick up", "pick", "pick up rock", "rock"}, "The rock looks like a crystal from a Sci-Fi movie!", inspectRock),
+            new Discover("Inspect the peculiar wall", new []{"inspect wall", "wall"}, "When you touch the wall it falls apart revealing a puzzle!", unlockLever),
             
         };
         return new Area(2,
-            "You arrive in a cave filled with many objects. The door behind you has closed. ..................",
+            "You arrive in a cave that looks empty. The door behind you has closed. You notice a peculiar wall. You see a shiny rock by the wall.",
             area2Actions, new[] { 0, 2, 5 });
     }
 

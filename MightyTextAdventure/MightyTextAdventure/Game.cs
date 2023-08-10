@@ -94,7 +94,8 @@ public class Game
       _display.PrintMessage("Your flashlight battery ran out!");
       return false;
     }
-    _display.PrintMessage(_player.Lamp.GetDescription());
+    _display.PrintMessage("\n");
+    _display.PrintMessage(_player.Lamp.GetCharge());
     _display.PrintMessage(action.Perform(_player, _areas));
     return true;
   }

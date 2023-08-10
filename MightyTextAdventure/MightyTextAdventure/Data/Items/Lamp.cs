@@ -15,8 +15,8 @@ public class Lamp : Item
     return _charge > 0;
   }
 
-  public override string GetDescription()
+  public string GetCharge()
   {
-    return $"{base.GetDescription()}. You have {_charge} charges remaining.";
+    return $"You have {_charge} charges remaining.";
   }
 }
