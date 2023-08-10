@@ -48,9 +48,13 @@ public class Game
 
       var playerInput = _input.GetInputFromUser();
 
-      if (playerInput is "h" or "help")
+      if (playerInput.ToLower() is "h" or "help")
       {
         isRunning = DisplayHelpMessage();
+      }
+      else if (playerInput.ToLower() == "inventory" || playerInput == "i")
+      {
+        isRunning = DisplayInventory();
       }
       else
       {
@@ -76,7 +80,7 @@ public class Game
   {
     _display.PrintMessage("Please choose a name for your character.");
     string nameOfCharacter = _input.GetInputFromUser();
-    var lamp = new Lamp("lamp", "a lamp", 30);
+    var lamp = new Lamp("Flashlight", "Just a regular flashlight", 30);
     Player player = new(nameOfCharacter, _areas[0], lamp);
     _player = player;
   }
@@ -110,6 +114,25 @@ public class Game
       _display.PrintMessage("");
     }
     _display.PrintMessage("**********************************************************************************************");
+
+    return true;
+  }
+
+  private bool DisplayInventory()
+  {
+    _display.PrintMessage("\n");
+    if (_player.Inventory.Items.Count == 0)
+    {
+      _display.PrintMessage("Your inventory is empty.");
+    }
+    else
+    {
+      _display.PrintMessage("You have the following items:");
+      foreach (var item in _player.Inventory.Items)
+      {
+        _display.PrintMessage(item.ToString());
+      }
+    }
 
     return true;
   }

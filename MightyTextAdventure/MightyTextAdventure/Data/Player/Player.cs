@@ -31,7 +31,7 @@ public class Player
     _currentArea = startingArea;
     _name = name;
     Lamp = lamp;
-    _inventory = new Inventory(new Lamp("Lamp", "Just a regular lamp", 10));
+    _inventory = new Inventory();
   }
 
 

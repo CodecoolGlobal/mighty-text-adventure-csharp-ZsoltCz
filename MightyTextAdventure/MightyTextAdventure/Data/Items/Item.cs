@@ -24,6 +24,6 @@ public class Item
 
   public override string ToString()
   {
-    return _description;
+    return $"{_name}: {_description}";
   }
 }

@@ -19,4 +19,9 @@ public class Lamp : Item
   {
     return $"You have {_charge} charges remaining.";
   }
+
+  public override string ToString()
+  {
+    return $"{base.ToString()} It has {_charge} charges left";
+  }
 }
