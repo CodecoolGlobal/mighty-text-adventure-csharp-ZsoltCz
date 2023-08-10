@@ -80,16 +80,23 @@ public class AreaConstructor
             new[] { "try the puzzle", "puzzle", "solve", "solve puzzle" },
             "You hear a satisfying beep coming from the screen. A hidden compartment opens and reveals your car keys.",
             "The screen makes a terrible sound.", pickupCarKeyAction);
+
+    var moveRock = new Discover("Move giant rock", new[] {"move rock"}, "Through big effort you managed to move the rock. Behind it you see a screen embedded into the wall. It displays 2 numbers and an equation which you have to solve in order to move forward.", puzzle);
+
+    var inspectWardrobe = new Inspect("Inspect wardrobe", new[] { "inspect wardrobe" }, "You open the wardrobe but nothing special seems to catch your eyes so you keep looking...");
+
+    var inspectRock = new Discover("Inspect wierdly colorful rock", new[] { "inspect rock" }, "You discover that there is note on the bottom of the rock. It says that you have to move the giant rock.", moveRock);
         
         var area3Actions = new List<Action>()
         {
             moveToArea2,
             moveToArea5,
-            puzzle,
+            inspectWardrobe,
+            inspectRock,
         };
         
         return new Area(3,
-            "You arrive in a smaller rectangular room filled with dust. You see a screen with 2 numbers and your flashlight reveals an opening in front of you in the cave wall.",
+            "You arrive in a smaller rectangular room filled with dust. You see a wardrobe and a colorfully glowing rock on the ground.",
             area3Actions, new[] { 2, 5 });
     }
 
