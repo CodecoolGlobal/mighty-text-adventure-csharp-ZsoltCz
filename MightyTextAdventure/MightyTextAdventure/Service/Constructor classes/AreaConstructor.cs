@@ -64,16 +64,22 @@ public class AreaConstructor
             "You pull the lever and a hidden door on your left opens up.",
             "The hidden door on the right closes and the left one opens",
             "The hidden door on the left closes and the right one opens", moveToArea3, moveToArea4);
+        var unlockLever = new MathPuzzle("Try the puzzle",
+            new[] { "try the puzzle", "puzzle", "solve", "solve puzzle", "try puzzle" },
+            "You hear a satisfying beep coming from the screen. The screen disappears and reveals a lever.",
+            "The screen makes a terrible sound.", pullLever);
+        var inspectRock = new Inspect("Inspect shiny rock", new[] {"inspect rock", "inspect"}, "It looks really familiar!");
         
-        var area1Actions = new List<Action>
+        
+        var area2Actions = new List<Action>
         {
-            new MathPuzzle("Try the puzzle", new[] { "try the puzzle", "puzzle", "solve", "solve puzzle", "try puzzle" },
-                "You hear a satisfying beep coming from the screen. The screen disappears and reveals a lever.",
-                "The screen makes a terrible sound.", pullLever)
+            new Discover("You see a shiny rock by the wall of the room.", new[] {"pick up", "pick", "pick up rock", "rock"}, "The rock looks like a crystal from a Sci-Fi movie it was on a button that revealed a lever!", inspectRock),
+            new Discover("At the other end of the room the wall looks peculiar", new []{"inspect wall", "wall"}, "When you touch the wall it falls apart revealing a puzzle!", unlockLever),
+            
         };
         return new Area(2,
             "You arrive in a cave filled with many objects. The door behind you has closed. ..................",
-            area1Actions, new[] { 0, 2, 5 });
+            area2Actions, new[] { 0, 2, 5 });
     }
 
     private static Area CreateArea3()
