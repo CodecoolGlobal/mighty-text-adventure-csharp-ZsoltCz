@@ -16,7 +16,7 @@ public class Switch : Action
         _afterDescription1 = afterDescription1;
         _afterDescription2 = afterDescription2;
     }
-
+    
     public override string Perform(Player player, Area[] areas)
     {
         var availableActions = player.CurrentArea.Actions;

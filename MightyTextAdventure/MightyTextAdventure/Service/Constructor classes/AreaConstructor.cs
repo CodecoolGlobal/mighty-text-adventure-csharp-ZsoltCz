@@ -38,13 +38,21 @@ public class AreaConstructor
 
     private static Area CreateArea1()
     {
+        var pushButton = new Move("Go into the right tunnel", new[] { "right", "go right", "r" }, "You go into the right tunnel.", 2);
+        var seeButton = new Discover("Push the button", new[] { "push", "button", "push button", "activate" },
+            "The wall on the right begins to move, revealing a new passage!", pushButton);
         var area1Actions = new List<Action>
         {
+            //Alagút elrejtése, gombbal
             new Move("Exit cave", new[] { "back", "go back", "b", "exit", "exit cave" }, "You exit the cave.", 0),
-            new Move("Go right", new[] { "right", "go right", "r" }, "You go into the right tunnel.", 2)
+            new Discover("Examine Rug", new[] {"examine", "examine rug", "rug", "carpet", "examine carpet"}, "You see an indentation under the rug, inside is a stone button surrounded by red dust.", seeButton),
+            new Inspect("Look at odd-looking dust", new[]{"look", "dust", "look at dust", "examine dust"}, "The sparkling red dust seems to go from the rug to the right wall, you figure it's best not to disturb it."),
+            new Inspect("Catch bug", new[] {"catch", "bug", "catch bug"}, "You catch the bug for only a second, but it escapes from you clutches. An error message still lingers in your head."),
+            new Inspect("Drink water", new[] { "drink", "drink water", "drink tar" },
+                "It looks and smells like oil, I would rather not drink it.")
         };
         return new Area(1,
-            "You arrive in a dark cave entrance. Your lamp reveals two tunnels, one on the right and another on the left.",
+            "You arrive in a dark cave entrance. Your lamp reveals an old rug in the middle of the cave, odd-looking dust on the ground, fresh water pouring from the other side of the room, an opening on the ceiling and an annoying bug that likes your lamp a bit too much.",
             area1Actions, new[] { 0, 2, 5 });
     }
   
@@ -129,11 +137,36 @@ public class AreaConstructor
 
     private static Area CreateArea5()
     {
+        //Items
+        var wood = new Item("Wood", "Some wooden material.");
+        var tools = new Item("Woodworking tools", "Some regular woodworking tools. Read the manual before use!");
         var ladder = new Item("Ladder", "A ladder.");
+        
+        //Actions
         var pickupLadderAction = new TakeItemAction("Pick up ladder",
             new[] { "pick up ladder", "take ladder", "ladder" },
             "You have picked up the ladder", ladder);
         
+        var useToolsAction = new GiveItemAction("Use the tools to make a ladder", new []{"use tools", "make ladder", "ladder"},
+            "You have built a ladder.", "You can't build a ladder.",
+            tools, pickupLadderAction);
+        
+        var placeWoodAction = new GiveItemAction("Place wood on the woodworking table", new []{"place wood", "place wood on table", "wood"},
+            "You have placed the wood on the woodworking table.", "You don't have wood",
+            wood, useToolsAction);
+        
+        var pickupWoodAction = new TakeItemActionSpecial("Take wood from storage",
+            new[] { "take wood", "take", "wood", "pick up wood" }, "You have picked up the wood", wood, 5,
+            placeWoodAction);
+        
+        var pickupToolsAction = new TakeItemActionSpecial("Take tools from storage", 
+            new []{"take tools", "take", "tools", "pick up tools"}, "You got the tools.",
+            tools,5, pickupWoodAction);
+        
+        var openStorageRoomAction = new Discover("Open the door near the table", new []{"open door", "open", "door"},
+            "You have opened the door, revealing a woodworking supply storage with some tools and wood inside.", pickupToolsAction);
+        
+
         var moveFromArea1ToArea5 = new Move(
             "Climb up the ladder",
             new[] { "climb", "climb up", "climb ladder", "ladder", "left", "go left", "l" },
@@ -154,11 +187,11 @@ public class AreaConstructor
         var area5Actions = new List<Action>()
         {
             moveToArea3,
-            pickupLadderAction,
-            placeLadderAction
+            placeLadderAction,
+            openStorageRoomAction
         };
         
-        return new Area(5, "You are in a circular room. There is a relatively deep hole to your left with faint light coming out of it. You see a ladder in the far side of the room.",
+        return new Area(5, "You are in a circular room. There is a relatively deep hole to your left with faint light coming out of it. You see a woodworking table and a door on the far side of the room.",
             area5Actions, new[]{1, 3});
 
 
