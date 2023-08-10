@@ -104,6 +104,8 @@ public class AreaConstructor
     private static Area CreateArea4()
     {
         var codecoolSticker = new Item("Codecool sticker", "A sticker featuring the Codecool logo");
+        var uselessHat = new Item("A hat", "Looks really nice and comfy");
+        var oldRing = new Item("The one ring", "There are markings. It's some form of elvish. I can't read it");
         var inspectStickerAction = new Inspect("Inspect Codecool sticker", new[] { "inspect sticker", "inspect" },
             "You look at the Codecool sticker. It's very cool.");
         var moveToArea2 = new Move("Go back to the previous room", new[] { "go back", "back" },
@@ -116,10 +118,17 @@ public class AreaConstructor
         var pickupStickerAction = new TakeItemActionSpecial("Pick up the Codecool sticker",
             new[] { "pick up sticker", "sticker", "pick up the sticker", "pick up" },
             "You found the secret Codecool sticker", codecoolSticker, 0, placeStickerAction);
-        
+
+        var pickupHatAction = new TakeItemAction("Pick up the hat", new[] { "pick up the hat", "hat", "pick up hat" },
+            "The hat seems old. Also it has a name on it: 'Indiana'... Weird", uselessHat);
+        var pickupRingAction = new TakeItemAction("Pick up the ring",
+            new[] { "pick up the ring", "ring", "pick up ring" },
+            "There are markings. It's some form of elvish. I can't read it", oldRing);
         var area4Actions = new List<Action>()
         {
             pickupStickerAction,
+            pickupHatAction,
+            pickupRingAction,
             moveToArea2
         };
 
