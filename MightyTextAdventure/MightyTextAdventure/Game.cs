@@ -47,14 +47,22 @@ public class Game
       }
 
       var playerInput = _input.GetInputFromUser();
-      var chosenAction = playerCurrentArea.Actions.Find(a => a.Triggers.Contains(playerInput.ToLower()));
-      if (chosenAction != null)
+
+      if (playerInput is "h" or "help")
       {
-        isRunning = Step(playerCurrentArea.Connections, chosenAction);
+        isRunning = DisplayHelpMessage();
       }
       else
       {
-        isRunning = Step(playerCurrentArea.Connections, new MA.Inspect("impossible action", Array.Empty<string>(), "Can't do that"));
+        var chosenAction = playerCurrentArea.Actions.Find(a => a.Triggers.Contains(playerInput.ToLower()));
+        if (chosenAction != null)
+        {
+          isRunning = Step(playerCurrentArea.Connections, chosenAction);
+        }
+        else
+        {
+          isRunning = Step(playerCurrentArea.Connections, new MA.Inspect("impossible action", Array.Empty<string>(), "Can't do that"));
+        }
       }
     }
   }
@@ -88,6 +96,20 @@ public class Game
     }
     _display.PrintMessage(_player.Lamp.GetDescription());
     _display.PrintMessage(action.Perform(_player, _areas));
+    return true;
+  }
+
+  private bool DisplayHelpMessage()
+  {
+    _display.PrintMessage("The goal of the game is to escape the creepy forest. However, your car keys are lost. Try to find them.");
+    foreach (var action in _player.CurrentArea.Actions)
+    {
+      _display.PrintInSameLine($"- {action.Description}: ");
+      _display.PrintInSameLine(String.Join(", ", action.Triggers));
+      _display.PrintMessage("");
+    }
+    _display.PrintMessage("**********************************************************************************************");
+
     return true;
   }
 }
