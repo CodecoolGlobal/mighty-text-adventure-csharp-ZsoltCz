@@ -13,8 +13,8 @@ public class AreaConstructor
 
     public AreaConstructor()
     {
-        Areas = new Area[]
-        {
+    Areas = new Area[]
+    {
             CreateArea0(),
             CreateArea1(),
             CreateArea2(),
@@ -33,7 +33,7 @@ public class AreaConstructor
             new GiveItemAction("Open car with keys", new []{"open car", "enter car", "car"}, "You use your keys to open the car.", "You don't have the keys!", CarKey, enterCar),
             new GameEndingAction("Keep walking", new []{"walk"}, "You leave your car behind and walk home. Thank you for protecting the environment!")
         };
-        return new Area(0, "You are on a road. Your car keys are missing. There is a dark cave in front of you.", area0Actions, new int[] { 1 });
+        return new Area(0, "You are on a road. Your car keys are missing. You look around and see a flashlight and you decide to pick it up... There is a dark cave in front of you.", area0Actions, new int[] { 1 });
     }
 
     private static Area CreateArea1()

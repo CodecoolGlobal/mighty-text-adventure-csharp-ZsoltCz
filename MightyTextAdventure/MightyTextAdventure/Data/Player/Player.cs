@@ -1,5 +1,6 @@
 ﻿using MightyTextAdventure.Data.Items;
 using MightyTextAdventure.Data.Places;
+using System.Runtime.CompilerServices;
 
 namespace MightyTextAdventure.Data.Player;
 
@@ -9,9 +10,9 @@ public class Player
 
   private readonly string _name;
 
-  private Inventory _inventory;
+  private readonly Inventory _inventory = new Inventory();
 
-  public Lamp Lamp { get; }
+  //public Lamp Lamp { get; }
 
   public Inventory Inventory => _inventory;
 
@@ -26,12 +27,12 @@ public class Player
     }
   }
 
-  public Player(string name, Area startingArea, Lamp lamp)
+  public Player(string name, Area startingArea)
   {
     _currentArea = startingArea;
     _name = name;
-    Lamp = lamp;
-    _inventory = new Inventory();
+    //Lamp = lamp;
+    //_inventory.AddItem(lamp);
   }
 
 

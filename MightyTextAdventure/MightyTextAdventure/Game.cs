@@ -81,7 +81,8 @@ public class Game
     _display.PrintMessage("Please choose a name for your character.");
     string nameOfCharacter = _input.GetInputFromUser();
     var lamp = new Lamp("Flashlight", "Just a regular flashlight", 30);
-    Player player = new(nameOfCharacter, _areas[0], lamp);
+    Player player = new(nameOfCharacter, _areas[0]);
+    player.Inventory.AddItem(lamp);
     _player = player;
   }
 
@@ -93,13 +94,16 @@ public class Game
       _display.PrintMessage(action.Perform(_player, _areas));
       return false;
     }
-    if (!_player.Lamp.Drain())
+
+    Lamp lamp = _player.Inventory.FindLamp();
+
+    if (!lamp.Drain())
     {
       _display.PrintMessage("Your flashlight battery ran out!");
       return false;
     }
     _display.PrintMessage("\n");
-    _display.PrintMessage(_player.Lamp.GetCharge());
+    _display.PrintMessage(lamp.GetCharge());
     _display.PrintMessage(action.Perform(_player, _areas));
     return true;
   }

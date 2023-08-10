@@ -34,4 +34,9 @@ public class Inventory
   {
     return Items.Remove(item);
   }
+
+  public Lamp FindLamp()
+  { 
+      return (Lamp)Items.Find(item => item.GetType() == typeof(Lamp));
+  }
 }
