@@ -6,17 +6,17 @@ namespace MightyTextAdventure.Service.Actions;
 
 public class GiveItemActionSpecial : GiveItemAction
 {
-    private readonly int _indexOfAffectedArea;
+    protected readonly int IndexOfAffectedArea;
     public GiveItemActionSpecial(string description, string[] triggers, string afterDescription, string afterDescription1, Item item, Action actionToUnlock, int indexOfAffectedArea) : base(description, triggers, afterDescription, afterDescription1, item, actionToUnlock)
     {
-        _indexOfAffectedArea = indexOfAffectedArea;
+        IndexOfAffectedArea = indexOfAffectedArea;
     }
 
     public override string Perform(Player player, Area[] areas)
     {
         if (player.Inventory.RemoveItem(Item))
         {
-            areas[_indexOfAffectedArea].Actions.Add(ActionToUnlock);
+            areas[IndexOfAffectedArea].Actions.Add(ActionToUnlock);
             player.CurrentArea.Actions.Remove(this);
             return AfterDescription;
         }

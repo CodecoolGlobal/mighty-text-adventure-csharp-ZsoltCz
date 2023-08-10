@@ -41,7 +41,6 @@ public class AreaConstructor
         var area1Actions = new List<Action>
         {
             new Move("Exit cave", new[] { "back", "go back", "b", "exit", "exit cave" }, "You exit the cave.", 0),
-            new Move("Go left", new[] { "left", "go left", "l" }, "You go into the left tunnel.", 5),
             new Move("Go right", new[] { "right", "go right", "r" }, "You go into the right tunnel.", 2)
         };
         return new Area(1,
@@ -61,7 +60,7 @@ public class AreaConstructor
         var area1Actions = new List<Action>
         {
             new MathPuzzle("Try the puzzle", new[] { "try the puzzle", "puzzle", "solve", "solve puzzle", "try puzzle" },
-                "You hear a satisfying beep coming from the screen.",
+                "You hear a satisfying beep coming from the screen. The screen disappears and reveals a lever.",
                 "The screen makes a terrible sound.", pullLever)
         };
         return new Area(2,
@@ -79,7 +78,7 @@ public class AreaConstructor
             "You go into the opening in front of you.", 5);
         var puzzle = new MathPuzzle("Try to solve the puzzle",
             new[] { "try the puzzle", "puzzle", "solve", "solve puzzle" },
-            "You hear a satisfying beep coming from the screen.",
+            "You hear a satisfying beep coming from the screen. A hidden compartment opens and reveals your car keys.",
             "The screen makes a terrible sound.", pickupCarKeyAction);
         
         var area3Actions = new List<Action>()
@@ -127,10 +126,10 @@ public class AreaConstructor
         var pickupLadderAction = new TakeItemAction("Pick up ladder",
             new[] { "pick up ladder", "take ladder", "ladder" },
             "You have picked up the ladder", ladder);
-
+        
         var moveFromArea1ToArea5 = new Move(
             "Climb up the ladder",
-            new[] { "climb", "climb up", "climb ladder", "ladder" },
+            new[] { "climb", "climb up", "climb ladder", "ladder", "left", "go left", "l" },
             "You climb up the ladder",
             5
         );
@@ -139,9 +138,9 @@ public class AreaConstructor
             "You move back to the previous room.", 3);
         var moveToArea1 = new Move("Climb down the ladder", new[] { "climb", "climb down", "go down" },
             "You climb down the ladder", 1);
-        var placeLadderAction = new GiveItemAction("Place ladder into the hole", new[] { "place ladder", "ladder" },
+        var placeLadderAction = new PlaceLadderAction("Place ladder into the hole", new[] { "place ladder", "ladder" },
             "You have placed the ladder in the hole, making it safe to descend.",
-            "You don't have a ladder!", ladder, moveToArea1);
+            "You don't have a ladder!", ladder, moveFromArea1ToArea5, 1, moveToArea1);
         
         
 
