@@ -146,7 +146,7 @@ public class AreaConstructor
         };
 
         return new Area(4,
-            "You find yourself in a colorful room full of gold coins and a pedestal with a familiar sticker on it",
+            "You find yourself in a colorful room full of riches, an old hat, a gold ring and a pedestal with a familiar sticker on it",
             area4Actions, new[] { 2 });
     }
 
