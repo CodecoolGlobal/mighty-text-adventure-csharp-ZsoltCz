@@ -80,7 +80,7 @@ public class Game
   {
     _display.PrintMessage("Please choose a name for your character.");
     string nameOfCharacter = _input.GetInputFromUser();
-    var lamp = new Lamp("Flashlight", "Just a regular flashlight", 3);
+    var lamp = new Lamp("Flashlight", "Just a regular flashlight", 40);
     Player player = new(nameOfCharacter, _areas[0]);
     player.Inventory.AddItem(lamp);
     _player = player;
