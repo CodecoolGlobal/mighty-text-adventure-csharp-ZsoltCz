@@ -80,7 +80,7 @@ public class Game
   {
     _display.PrintMessage("Please choose a name for your character.");
     string nameOfCharacter = _input.GetInputFromUser();
-    var lamp = new Lamp("Flashlight", "Just a regular flashlight", 30);
+    var lamp = new Lamp("Flashlight", "Just a regular flashlight", 3);
     Player player = new(nameOfCharacter, _areas[0]);
     player.Inventory.AddItem(lamp);
     _player = player;
@@ -104,7 +104,9 @@ public class Game
     }
     _display.PrintMessage("\n");
     _display.PrintMessage(lamp.GetCharge());
+    Console.ForegroundColor = ConsoleColor.Green;
     _display.PrintMessage(action.Perform(_player, _areas));
+    Console.ForegroundColor = ConsoleColor.White;
     return true;
   }
 

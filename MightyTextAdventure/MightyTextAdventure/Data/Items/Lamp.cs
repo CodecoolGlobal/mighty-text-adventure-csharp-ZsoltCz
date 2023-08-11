@@ -17,7 +17,8 @@ public class Lamp : Item
 
   public string GetCharge()
   {
-    return $"You have {_charge} charges remaining.";
+    Console.ForegroundColor = ConsoleColor.Green;
+    return $"Your flashlight has {_charge} charges remaining.";
   }
 
   public override string ToString()
